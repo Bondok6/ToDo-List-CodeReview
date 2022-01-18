@@ -2,18 +2,23 @@ import Tasks from '../classTasks.js';
 
 // check Duplication
 const checkDuplicate = (desc) => {
-  const errorMsg = document.querySelector('.error');
-  const successMsg = document.querySelector('.success');
+  const status = document.querySelector('.status');
+  const div = document.createElement('div');
+  const span = document.createElement('span');
+
   const t = Tasks.tasks.filter((task) => desc === task.description);
 
   if (!t.length) {
-    errorMsg.classList.add('hidden');
-    successMsg.classList.remove('hidden');
+    div.classList.add('success');
+    span.textContent = '✅ The task is added successfully';
+    div.appendChild(span);
+    status.appendChild(div);
     return true;
   }
-
-  errorMsg.classList.remove('hidden');
-  successMsg.classList.add('hidden');
+  div.classList.add('error');
+  span.textContent = '❌ OOPS!! this task is already added';
+  div.appendChild(span);
+  status.appendChild(div);
   return false;
 };
 
